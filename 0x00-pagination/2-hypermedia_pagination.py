@@ -54,16 +54,22 @@ class Server:
         data = self.get_page(page, page_size)
         start_index, end_index = index_range(page, page_size)
         # previous_page: Optional[int] = None
-        previous_page:int = 0
+        previous_page: int = 0
         if start_index > 0:
             previous_page = page - 1
-        # next_page: Union[str, int] = 
+        # next_page: Union[str, int] =
         next_page: int = 0
         if end_index < len(self.dataset()):
             next_page = page + 1
-        total_pages = len(self.dataset()) // page_size +(1 if len(self.dataset()) % page_size > 0 else 0)
-        return {"page_size": len(data), "page": page, "data": len(data), "next_page": next_page, "prev_page": previous_page, "total_pages": total_pages}
-
+        total_pages = len(self.dataset()) // page_size + \
+            (1 if len(self.dataset()) % page_size > 0 else 0)
+        return {
+            "page_size": len(data),
+            "page": page,
+            "data": len(data),
+            "next_page": next_page,
+            "prev_page": previous_page,
+            "total_pages": total_pages}
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
