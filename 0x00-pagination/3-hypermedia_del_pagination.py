@@ -49,23 +49,19 @@ class Server:
 
         dataset = self.indexed_dataset()
         end_index = index + page_size
-        next_index = end_index + 1
+        next_index = end_index
+        page = index // page_size + 1
         data = []
-        """
-            {apple: 100, mango: 40, papaya: 200}
-
-            """
         for i in range(index, end_index):
             if i in dataset.keys():
                 data.append(dataset[i])
             else:
-                end_index += 1
+                next_index += 1
 
-        page = index // page_size + 1
         # start_index = (page - 1) * page_size
         # page_size = current page size
         return {
             "index": index,
-            "next_index": next_index,
+            "data": data,
             "page_size": page_size,
-            "data": data}
+            "next_index": next_index}
