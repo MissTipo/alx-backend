@@ -41,8 +41,8 @@ class Server:
         dataset = self.dataset()
         # call index_range() to get start and end index using tuple unpacking
         start_index, end_index = index_range(page, page_size)
-        if start_index > page_size:
-            return []
+        #if start_index > page_size:
+            #return []
         # Return the appropriate slice of the dataset using list slicing
         return dataset[start_index:end_index]
 
