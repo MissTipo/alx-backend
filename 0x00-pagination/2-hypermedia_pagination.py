@@ -46,7 +46,8 @@ class Server:
         # Return the appropriate slice of the dataset using list slicing
         return dataset[start_index:end_index]
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[str, Union[int, List[List]]]:
+    def get_hyper(self, page: int = 1,
+                  page_size: int = 10) -> Dict[str, Union[int, List[List]]]:
         """
         Takes page and page size as arguments and returns a dictionary
         containing the following key-value pairs
