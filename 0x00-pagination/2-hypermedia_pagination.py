@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """Simple helper function"""
 
-from typing import Tuple
 import csv
 import math
-from typing import List, Dict, Union
+from typing import Tuple, List, Dict, Union, Optional
 
 
 class Server:
@@ -47,7 +46,8 @@ class Server:
         return dataset[start_index:end_index]
 
     def get_hyper(self, page: int = 1,
-                  page_size: int = 10) -> Dict[str, Union[int, List[List]]]:
+                  # page_size: int = 10) -> Dict[str, Union[int, List[List]]]:
+                  page_size: int = 10) -> Dict:
         """
         Takes page and page size as arguments and returns a dictionary
         containing the following key-value pairs
@@ -55,11 +55,11 @@ class Server:
         data = self.get_page(page, page_size)
         start_index, end_index = index_range(page, page_size)
         # previous_page: Optional[int] = None
-        previous_page: int = 0
+        previous_page = None
         if start_index > 0:
             previous_page = page - 1
         # next_page: Union[str, int] =
-        next_page: int = 0
+        next_page = None
         if end_index < len(self.dataset()):
             next_page = page + 1
         total_pages = len(self.dataset()) // page_size + \
