@@ -15,10 +15,12 @@ class FIFOCache(BaseCaching):
             self.cache_data[key] = item
         # Note: The dictionary is alphabetiaclly sorted
         # So first element to go in is first in the dict
-        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+        elif len(self.cache_data) > BaseCaching.MAX_ITEMS:
             first_in = list(self.cache_data.keys())[0]
             self.cache_data.pop(first_in)
             print("DISCARD:{}".format(first_in))
+        else:
+            return
 
     def get(self, key):
         """Returns the dict value linked to key"""
