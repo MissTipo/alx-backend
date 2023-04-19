@@ -22,6 +22,6 @@ class FIFOCache(BaseCaching):
 
     def get(self, key):
         """Returns the dict value linked to key"""
-        if not key and key not in self.cache.keys():
+        if (key is None) or (key not in self.cache):
             return None
-        return self.cache_data.get(key)
+        return self.cache_data.get[key]
