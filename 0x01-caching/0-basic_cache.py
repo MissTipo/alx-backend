@@ -16,11 +16,3 @@ class BasicCache(BaseCaching):
             return None
         if key in self.cache_data:
             return self.cache_data[key]
-        # return self.cache_data.get(key)
-
-
-    """def get(self, key):
-        Returns the dic value linked to the key
-        if key is None or self.cache_data.get(key) is None:
-            return None
-        return self.cache_data.get(key)"""
