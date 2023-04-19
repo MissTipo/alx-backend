@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Basic cache dictionary"""
+
 from base_caching import BaseCaching
 
 
@@ -15,7 +16,7 @@ class BasicCache(BaseCaching):
 
     def get(self, key):
         """Returns the dictionary value linked to the key"""
-        if key is None and key not in self.cache_data:
+        if (key is None) or (key not in self.cache_data):
             return None
         if key in self.cache_data:
             return self.cache_data[key]
