@@ -1,62 +1,46 @@
 #!/usr/bin/env python3
-
-"""
-module for class `MRUCache` that inherits from BaseCaching
-`MRUCache` caching system uses the Most Recently Used Cache Replacement Policy
-"""
+"""MRU Caching"""
 
 from base_caching import BaseCaching
 
 
 class MRUCache(BaseCaching):
-    """
-    class MRUCache
-    methods:    __init__
-                put
-                get
-    """
+    """Inherits from BaseCaching and is a caching system"""
 
     def __init__(self):
-        """
-        class constructor
-        attributes:     self.key_list
-                        self.MAX_ITEMS
-        """
+        """Instantiates LIFOCache"""
         super().__init__()
         self.keys = []
 
     def put(self, key, item):
-        """
-        args:   self
-                key: Any
-                item: Any
-        """
-        if (key is None) or (item is None):
-            return
-        elif (key in self.cache_data):
-            self.keys.remove(key)
+        """Assigns the item value for the key key to the cache dictionary"""
+        # if key or item:
+        # self.cache_data[key] = item
+        if key and item:
+            if key in self.cache_data:
+                self.cache_data.pop(key)
+                # self.keys.append(key)
+                # self.cache_data[key] = item
+            elif len(self.cache_data) >= self.MAX_ITEMS:
+                least_used = self.keys.pop(0)
+                del self.cache_data[least_used]
+                print("DISCARD: {}".format(least_used))
             self.keys.insert(0, key)
             self.cache_data[key] = item
-        elif len(self.cache_data) < self.MAX_ITEMS:
-            self.keys.insert(0, key)
-            self.cache_data[key] = item
-        else:
-            x = self.keys.pop(0)
-            del self.cache_data[x]
-            print(f'DISCARD: {x}')
-            self.cache_data[key] = item
-            self.keys.insert(0, key)
+            """else:
+                least_used = self.keys.pop(0)
+                del self.cache_data[least_used]
+                print("DISCARD: {}".format(least_used))
+                self.cache_data[key] = item
+                self.keys.append(key)"""
 
     def get(self, key):
-        """
-        args:   self
-                key: Any
-        """
-        value = None
-        if (key is None) or (key not in self.cache_data):
-            return (value)
-        if (key in self.keys):
+        """Returns the dictionary value linked to the key"""
+        if key is None or key not in self.cache_data:
+            return None
+        if key in self.cache_data:
             self.keys.remove(key)
-            self.keys.insert(0, key)
-            value = self.cache_data[key]
-            return (value)
+            self.keys.append(key)
+            return self.cache_data[key]
+            return self.cache_data[key]
+        # return self.cache_data.get(key)
